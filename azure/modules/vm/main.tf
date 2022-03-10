@@ -29,7 +29,7 @@ resource "azurerm_linux_virtual_machine" "jenkins" {
   name                = "${var.prefix}-vm-${random_id.suffix.hex}"
   resource_group_name = var.resource_group_name
   location            = var.location
-  vm_size                = var.instance_type
+  size                = var.instance_type
   admin_username      = var.admin_user
   network_interface_ids = [
     azurerm_network_interface.jenkins_interface.id,
