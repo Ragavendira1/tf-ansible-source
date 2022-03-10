@@ -25,7 +25,7 @@ resource "azurerm_network_interface" "jenkins_interface" {
   }
 }
 
-resource "azurerm_virtual_machine" "jenkins" {
+resource "azurerm_linux_virtual_machine" "jenkins" {
   name                = "${var.prefix}-vm-${random_id.suffix.hex}"
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -41,11 +41,14 @@ resource "azurerm_virtual_machine" "jenkins" {
   }
   
   os_disk {
-      caching           = "None"
-      storage_account_type ="Standard_LRS"
+#    name              = var.os_disk_name
+    caching           = var.os_disk_caching
+#    create_option     = var.os_disk_create_option
+#    managed_disk_type = var.os_disk_managed_disk_type
+    storage_account_type = "Standard_LRS"
   }
 
-  storage_image_reference {
+  source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-focal"
     sku       = "20_04-lts-gen2"
