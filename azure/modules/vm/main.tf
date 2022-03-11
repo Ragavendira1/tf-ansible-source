@@ -29,22 +29,19 @@ resource "azurerm_linux_virtual_machine" "jenkins" {
   name                = "${var.prefix}-vm-${random_id.suffix.hex}"
   resource_group_name = var.resource_group_name
   location            = var.location
-  vm_size                = var.instance_type
-  admin_username      = var.admin_user
+  size                = var.instance_type
+  admin_username      = var.admin_username
   network_interface_ids = [
     azurerm_network_interface.jenkins_interface.id,
   ]
-  
-  admin_ssh_key {
-    username = var.admin_user
-    public_key = var.admin_key_public 
+
+    admin_ssh_key {
+    username   = var.admin_username
+    public_key = var.admin_key_public
   }
-  
+
   os_disk {
-#    name              = var.os_disk_name
     caching           = var.os_disk_caching
-#    create_option     = var.os_disk_create_option
-#    managed_disk_type = var.os_disk_managed_disk_type
     storage_account_type = "Standard_LRS"
   }
 

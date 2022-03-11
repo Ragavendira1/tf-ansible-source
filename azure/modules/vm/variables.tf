@@ -22,16 +22,6 @@ variable "prefix" {
   default     = "jenkins"
 }
 
-variable "admin_user" {
-  type        = string
-  description = "Admin user for the image we're launching"
-}
-
-variable "admin_key_public" {
-  type        = string
-  description = "Public SSH key of admin user"
-}
-
 variable "instance_type" {
   type        = string
   description = "Instance type/size to deploy"
@@ -62,11 +52,6 @@ variable "tenant_id" {
   default = "3b0e7247-e0d5-44bf-8ed1-d01b18d16ca2"
 }
 
-variable "os_disk_name" {
-type = string 
-description = "os disk name"
-default = "jenkins-osdisk"
-}
 
 variable "os_disk_caching" {
 type = string 
@@ -74,16 +59,21 @@ description = "os disk caching"
 default = "ReadWrite"
 }
 
-variable "os_disk_create_option" {
-type = string 
-description = "os disk option"
-default = "FromImage"
-}
-
-
 variable "os_disk_managed_disk_type" {
 type = string 
 description = "os disk type"
 default = "Standard_LRS"
 }
 
+
+
+variable "admin_username" {
+  type        = string
+  description = "Azure userid used for authentication"
+  default     = "asgadmin"
+}
+
+variable "admin_key_public" {
+  type        = string
+  description = "Azure key used for authentication"
+}
